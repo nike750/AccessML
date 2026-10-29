@@ -2,7 +2,7 @@
 
 **Free, accessible machine learning education powered by open-weight AI models.**
 
-> 🔗 **Live demo:** `ADD-YOUR-LIVE-LINK-HERE`
+> 🔗 **Live demo:** https://accessml.vercel.app/
 > 💻 **Repository:** https://github.com/TitobiDave/AccessML
 
 ---
@@ -178,8 +178,8 @@ Lessons, quizzes, progress, certificates, users and labs have their own routers.
 
 | Name | Role |
 | --- | --- |
-| ADD NAME | ADD ROLE |
-| ADD NAME | ADD ROLE |
+| OLANIYI Olanike Gift | Backend and AI |
+| Oluwole Titobioluwa | Frontend and backend |
 
 ## Future Improvements
 
