@@ -1,18 +1,27 @@
-// All calls to the AccessML backend live here. In dev, Vite proxies /api -> http://localhost:8000
+// All calls to the AccessML backend live here.
+// Uses the same VITE_API_URL setting as the other pages (set it in Vercel for production).
+const BASE = (import.meta.env.VITE_API_URL ?? 'http://localhost:8000').replace(/\/+$/, '')
+
 async function post(path, body) {
   let res
   try {
-    res = await fetch(`/api${path}`, {
+    res = await fetch(`${BASE}/api${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
   } catch {
-    throw new Error('Cannot reach the backend. Is it running on port 8000? (uvicorn main:app --reload)')
+    throw new Error('Cannot reach the AI service. The server may be waking up, so try again in a moment.')
   }
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
-    const msg = typeof data.detail === 'string' ? data.detail : 'Please enter some code first.'
+    const d = data.detail
+    const msg =
+      typeof d === 'string'
+        ? d
+        : Array.isArray(d)
+          ? d.map((e) => `${e.loc?.slice(1).join('.')}: ${e.msg}`).join('; ')
+          : `Request failed (${res.status}).`
     throw new Error(msg)
   }
   return data

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { debugCode } from '../api.js'
+import { askTutor } from '../api.js'
 
 const AIMentor = ({ currentCode, errorMessage }) => {
   const [feedback, setFeedback] = useState('')
@@ -9,10 +9,9 @@ const AIMentor = ({ currentCode, errorMessage }) => {
     setLoading(true)
     setFeedback('')
     try {
-      setFeedback(await debugCode(currentCode, errorMessage || 'No error trace provided.'))
-    } catch (error) {
-      console.error('AI mentor error:', error)
-      setFeedback(error.message)
+      setReply(await askTutor(question.trim()))
+    } catch (err) {
+      setReply(err.message)
     } finally {
       setLoading(false)
     }
