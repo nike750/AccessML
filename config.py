@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:5173,https://accessml.vercel.app"
 
     groq_api_key: str = ""
-    groq_model: str = "openai/gpt-oss-20b"
+    GROQ_MODEL="openai/gpt-oss-20b"
     groq_base_url: str = "https://api.groq.com/openai/v1"
 
     quiz_pass_ratio: float = 0.7
