@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { askTutor } from '../api.js'
 
 export default function TutorPanel({ onClose }) {
   const [question, setQuestion] = useState('')
@@ -10,17 +11,7 @@ export default function TutorPanel({ onClose }) {
     setLoading(true)
     setReply('')
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/tutor/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
-      })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        throw new Error(err.detail || `Request failed (${res.status})`)
-      }
-      const data = await res.json()
-      setReply(data.reply)
+      setReply(await askTutor(question.trim()))
     } catch (err) {
       setReply(err.message)
     } finally {
@@ -29,7 +20,7 @@ export default function TutorPanel({ onClose }) {
   }
 
   return (
-    <div className="fixed right-4 top-20 z-50 w-96 rounded-xl border border-edge bg-nav p-4 shadow-2xl">
+    <div className="fixed right-4 top-20 z-50 w-96 max-w-[calc(100vw-2rem)] rounded-xl border border-edge bg-nav p-4 shadow-2xl">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-semibold text-white">AI Tutor</h2>
         <button onClick={onClose} className="text-slate-400 hover:text-white">✕</button>
