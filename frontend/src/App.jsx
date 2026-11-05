@@ -71,7 +71,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold tracking-tight">AccessML</h1>
               <span className="rounded bg-emerald-500/15 px-1.5 py-0.5 text-[10px] font-bold text-emerald-400 ring-1 ring-emerald-500/30">
-                QWEN 2.5
+              <span>GPT-OSS</span>
               </span>
             </div>
             <p className="text-xs text-slate-400">Free ML Powered by Open Weights</p>
