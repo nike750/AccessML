@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     cors_origins: list[str] = ["http://localhost:5173"]
 
     groq_api_key: str = ""
-    groq_model: str = "qwen-2.5-coder-32b"
+    groq_model: str = "openai/gpt-oss-20b"
     groq_base_url: str = "https://api.groq.com/openai/v1"
 
     quiz_pass_ratio: float = 0.7
